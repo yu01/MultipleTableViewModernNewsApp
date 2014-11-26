@@ -30,18 +30,57 @@ static const float HEADER_HEIGHT = 60.0f;
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    
 
 }
 
 - (void)viewWillAppear:(BOOL)animated{
-    [self loadPagingScrollView];    
+
+    
+    [self configureUI];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+- (void)configureUI
+{
+    [self loadPagingScrollView];
+    
+    [self loadSettingsButton];
+}
+
+-(void)loadSettingsButton
+{
+    CGRect screenFrame = [UIScreen mainScreen].bounds;
+    
+    //
+    //settings button
+    CGFloat inset = 20;
+    CGFloat settingsButtonHeight = 32;
+    CGFloat settingsButtonWidth = 32;
+    
+    CGRect settingsButtonFrame = CGRectMake(screenFrame.size.width - (settingsButtonWidth + inset),
+                                            screenFrame.size.height - (settingsButtonHeight + inset),
+                                            settingsButtonWidth,
+                                            settingsButtonHeight);
+    
+    UIButton *settingsButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [settingsButton setFrame:settingsButtonFrame];
+    
+    [settingsButton setBackgroundImage:[UIImage imageNamed:@"settings_button"] forState:UIControlStateNormal];
+    [settingsButton addTarget:self action:@selector(respondToPushSettingsButton:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.view addSubview:settingsButton];
+    
+    //bringSubViewToFront
+    //Moves the specified subview so that it appears on top of its siblings.
+    //This method moves the specified view to the end of the array of views in the subviews property.
+    [self.view bringSubviewToFront:settingsButton];
+    
+}
+
 
 #pragma mark - PagingScrollView
 
@@ -147,5 +186,12 @@ static const float HEADER_HEIGHT = 60.0f;
     [scrollView setContentOffset:CGPointMake(tabIndex * viewWidth, 0)];
     
 }
+#pragma mark - handle touch event
+
+-(void)respondToPushSettingsButton:(id)sender
+{
+    nil;
+}
+
 
 @end
