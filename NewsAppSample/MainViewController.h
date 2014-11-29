@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "ScrollMenuBar.h"
 
-@interface MainViewController : UIViewController<ScrollMenuBarDelegate>
+@interface MainViewController : UIViewController<ScrollMenuBarDelegate, UITableViewDataSource, UITableViewDelegate>
 
 
 @end

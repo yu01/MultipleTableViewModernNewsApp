@@ -28,6 +28,7 @@
 static const float HEADER_HEIGHT = 80.0f;
 static const float STATUS_BAR_HEIGHT = 20.0f;
 static const float SCROLL_MENU_BAR_HEIGHT = 40.0f;
+
 #define NULL_TO_NIL(obj) ({ __typeof__ (obj) __obj = (obj); __obj == [NSNull null] ? nil : obj; })
 
 
@@ -36,8 +37,6 @@ static const float SCROLL_MENU_BAR_HEIGHT = 40.0f;
     
     //To interact with the API, create an instance variable
     AFHTTPRequestOperationManager *_operationManager;
-    
-    NSArray *_articlesArray;
 }
 
 #pragma mark - View LifeCycle
@@ -57,6 +56,11 @@ static const float SCROLL_MENU_BAR_HEIGHT = 40.0f;
 - (void)viewWillAppear:(BOOL)animated{
 
     [self configureUI];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [self refreshData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -101,6 +105,29 @@ static const float SCROLL_MENU_BAR_HEIGHT = 40.0f;
     
 }
 
+#pragma mark - tableView
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return self.articles.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"
+                                                            forIndexPath:indexPath];
+    [self configureCell:cell atIndex:indexPath];
+    return cell;
+}
+
+-(void)configureCell:(UITableViewCell*)cell atIndex:(NSIndexPath*)indexPath{
+    // Get current article
+    Article *article = self.articles[indexPath.row];
+    cell.textLabel.text = article.title;
+    
+}
+
 #pragma mark - API
 - (void)refreshData
 {
@@ -135,7 +162,20 @@ static const float SCROLL_MENU_BAR_HEIGHT = 40.0f;
         
         //Persist created entities to storage
         [MagicalRecord saveUsingCurrentThreadContextWithBlock:^(NSManagedObjectContext *localContext) {
+            
+            //Fetch all stored entitieds & reload tableView
             self.articles = [[Article MR_findAll] mutableCopy];
+            
+            for(UIView *view in [scrollView subviews]){
+                if([view isKindOfClass:[UITableView class]]){
+                    UITableView *tableView = (UITableView*)view;
+                    tableView.delegate = self;
+                    tableView.dataSource = self;
+                    [tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"Cell"];
+                    [tableView reloadData];
+                }
+            }
+            
         } completion:^(BOOL success, NSError *error) {
             nil;
         }];
@@ -175,24 +215,32 @@ static const float SCROLL_MENU_BAR_HEIGHT = 40.0f;
         
         UITableView *tableView = [[UITableView alloc] initWithFrame:tableFrame style:UITableViewStylePlain];
         
+        //TODO refactore
         switch (i) {
             case 0:
                 tableView.backgroundColor = [UIColor greenColor];
+                tableView.tag = 100;
                 break;
             case 1:
                 tableView.backgroundColor = [UIColor redColor];
+                tableView.tag = 110;
                 break;
             case 2:
                 tableView.backgroundColor = [UIColor blueColor];
+                tableView.tag = 120;
                 break;
             case 3:
                 tableView.backgroundColor = [UIColor orangeColor];
+                tableView.tag = 130;
                 break;
             case 4:
                 tableView.backgroundColor = [UIColor purpleColor];
+                tableView.tag = 140;
                 break;
             case 5:
                 tableView.backgroundColor = [UIColor grayColor];
+                tableView.tag = 150;
+                break;
             default:
                 break;
         }
