@@ -20,7 +20,9 @@
 @end
 
 
-static const float HEADER_HEIGHT = 60.0f;
+static const float HEADER_HEIGHT = 80.0f;
+static const float STATUS_BAR_HEIGHT = 20.0f;
+static const float SCROLL_MENU_BAR_HEIGHT = 40.0f;
 
 @implementation ViewController{
     PagingScrollView *scrollView;
@@ -98,14 +100,14 @@ static const float HEADER_HEIGHT = 60.0f;
     scrollView.pagingEnabled = YES;
     scrollView.bounds = tableBounds; // scrollViewのページングをtableWidth単位に。
     scrollView.clipsToBounds = NO;   // 非表示になっているtableBounds外を表示。
-    scrollView.backgroundColor = [UIColor grayColor];
+    scrollView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:scrollView];
     
     // ５つのtableViewを横に並べる
     CGRect tableFrame = tableBounds;
 
     tableFrame.origin.x = 0.f;
-    tableFrame.origin.y = HEADER_HEIGHT;
+    tableFrame.origin.y = (STATUS_BAR_HEIGHT + HEADER_HEIGHT);
     for (int i = 0; i < numberOfTables; i++) {
         
         UITableView *tableView = [[UITableView alloc] initWithFrame:tableFrame style:UITableViewStylePlain];
@@ -141,7 +143,7 @@ static const float HEADER_HEIGHT = 60.0f;
     
     // メニューバー追加
     NSArray *menus = [self setupMenus];
-    _scrollMenuBar = [[ScrollMenuBar alloc] initWithArray:menus point:CGPointMake(0, 20)] ;
+    _scrollMenuBar = [[ScrollMenuBar alloc] initWithArray:menus point:CGPointMake(0, (STATUS_BAR_HEIGHT+ SCROLL_MENU_BAR_HEIGHT))] ;
 
     
     _scrollMenuBar.delegate = self ;
