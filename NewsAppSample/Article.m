@@ -14,5 +14,6 @@
 @dynamic imageUrl;
 @dynamic body;
 @dynamic title;
+@dynamic articleId;
 
 @end

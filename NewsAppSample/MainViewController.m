@@ -9,6 +9,7 @@
 #import "MainViewController.h"
 #import "PagingScrollView.h"
 #import "CoreData+MagicalRecord.h"
+#import "AFNetworking.h"
 #import "UIImageView+AFNetworking.h"
 #import "Article.h"
 
@@ -16,6 +17,7 @@
 
 @interface MainViewController ()
 
+@property (nonatomic) NSMutableArray *articles;
 @property ScrollMenuBar *scrollMenuBar;
 @property NSArray *pageTitles;
 
@@ -26,21 +28,34 @@
 static const float HEADER_HEIGHT = 80.0f;
 static const float STATUS_BAR_HEIGHT = 20.0f;
 static const float SCROLL_MENU_BAR_HEIGHT = 40.0f;
+#define NULL_TO_NIL(obj) ({ __typeof__ (obj) __obj = (obj); __obj == [NSNull null] ? nil : obj; })
+
 
 @implementation MainViewController{
     PagingScrollView *scrollView;
-
+    
+    //To interact with the API, create an instance variable
+    AFHTTPRequestOperationManager *_operationManager;
+    
+    NSArray *_articlesArray;
 }
 
+#pragma mark - View LifeCycle
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-
+    
+    //Initialize AFHTTPRequestOperationManager with API Base URL
+    _operationManager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:@"http://api.dribbble.com/"]];
+    
+    [self refreshData];
+    
+    //Refresh button
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated{
 
-    
     [self configureUI];
 }
 
@@ -84,6 +99,51 @@ static const float SCROLL_MENU_BAR_HEIGHT = 40.0f;
     //This method moves the specified view to the end of the array of views in the subviews property.
     [self.view bringSubviewToFront:settingsButton];
     
+}
+
+#pragma mark - API
+- (void)refreshData
+{
+    //Fetch articles from API
+    [_operationManager GET:@"shots/popular" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        //AFNetworking parses the JSON response, which can now be used like a NSDictionary
+        id articles = [operation.responseObject objectForKey:@"shots"];
+        
+        //Loop through articles from API
+        for(id article in articles){
+
+            //Take some values we'll need
+            NSString *title = [article objectForKey:@"title"];
+            NSString *imageUrl = [article objectForKey:@"image_teaser_url"];
+            NSString *body = NULL_TO_NIL([article objectForKey:@"description"]);
+            NSInteger articleId = [[article objectForKey:@"id"] integerValue];
+            
+            //Check if we already saved this articles...
+            Article *existingEntity = [Article MR_findFirstByAttribute:@"articleId" withValue:[NSNumber numberWithInteger:articleId]];
+            
+            //... if not, create a new entity
+            if(!existingEntity)
+            {
+                Article *articleEntity = [Article MR_createEntity];
+                articleEntity.articleId = articleId;
+                articleEntity.title = title;
+                articleEntity.imageUrl = imageUrl;
+                articleEntity.body = (body == nil)? @"" : body;
+            }
+        }
+        
+        //Persist created entities to storage
+        [MagicalRecord saveUsingCurrentThreadContextWithBlock:^(NSManagedObjectContext *localContext) {
+            self.articles = [[Article MR_findAll] mutableCopy];
+        } completion:^(BOOL success, NSError *error) {
+            nil;
+        }];
+        
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Failed to fetch articles from API");
+    }];
 }
 
 
@@ -197,6 +257,5 @@ static const float SCROLL_MENU_BAR_HEIGHT = 40.0f;
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:@"openSettings" object:self userInfo:nil];
 }
-
 
 @end
