@@ -12,3 +12,9 @@
 #define COCOAPODS_VERSION_MINOR_JASidePanels 3
 #define COCOAPODS_VERSION_PATCH_JASidePanels 2
 
+// RPSlidingMenu
+#define COCOAPODS_POD_AVAILABLE_RPSlidingMenu
+#define COCOAPODS_VERSION_MAJOR_RPSlidingMenu 1
+#define COCOAPODS_VERSION_MINOR_RPSlidingMenu 0
+#define COCOAPODS_VERSION_PATCH_RPSlidingMenu 3
+

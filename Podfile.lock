@@ -1,10 +1,13 @@
 PODS:
   - JASidePanels (1.3.2)
+  - RPSlidingMenu (1.0.3)
 
 DEPENDENCIES:
   - JASidePanels
+  - RPSlidingMenu
 
 SPEC CHECKSUMS:
   JASidePanels: ca943907d88a0738c80755204c6098969d43e4e9
+  RPSlidingMenu: d62f7c87eb7d8c630c67fdf63b9b4e5d94fff6b3
 
 COCOAPODS: 0.35.0
