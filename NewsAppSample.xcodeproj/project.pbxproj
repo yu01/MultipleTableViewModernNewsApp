@@ -28,6 +28,7 @@
 		BF2C3D241A2988C800A5A608 /* notification_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = BF2C3D211A2988C800A5A608 /* notification_icon.png */; };
 		BF8673801A2997D0007F119C /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF86737F1A2997D0007F119C /* SettingsViewController.swift */; };
 		BF8673821A299B45007F119C /* SettingsViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8673811A299B45007F119C /* SettingsViewCell.swift */; };
+		BFABD66A1A2A253C007494F8 /* Article.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BFABD6681A2A253C007494F8 /* Article.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +75,7 @@
 		BF86737E1A2997D0007F119C /* NewsAppSample-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NewsAppSample-Bridging-Header.h"; sourceTree = "<group>"; };
 		BF86737F1A2997D0007F119C /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		BF8673811A299B45007F119C /* SettingsViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewCell.swift; sourceTree = "<group>"; };
+		BFABD6691A2A253C007494F8 /* Article.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Article.xcdatamodel; sourceTree = "<group>"; };
 		E0B62C58808A991A384C316E /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4A6E9296B93E14CDD1CAAE9 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -129,6 +131,7 @@
 		BF11974C1A17AB230046AEA0 /* NewsAppSample */ = {
 			isa = PBXGroup;
 			children = (
+				BFABD6671A2A24E7007494F8 /* Model */,
 				BF2C3D141A2977DF00A5A608 /* ViewController */,
 				BF1197511A17AB230046AEA0 /* AppDelegate.h */,
 				BF1197521A17AB230046AEA0 /* AppDelegate.m */,
@@ -200,6 +203,14 @@
 				BF8673811A299B45007F119C /* SettingsViewCell.swift */,
 			);
 			name = ViewController;
+			sourceTree = "<group>";
+		};
+		BFABD6671A2A24E7007494F8 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				BFABD6681A2A253C007494F8 /* Article.xcdatamodeld */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 		E41D4069017EEB72D6228191 /* Frameworks */ = {
@@ -360,6 +371,7 @@
 				BF11978B1A17C0F10046AEA0 /* UIColor+Hex.m in Sources */,
 				BF1197531A17AB230046AEA0 /* AppDelegate.m in Sources */,
 				BF1197501A17AB230046AEA0 /* main.m in Sources */,
+				BFABD66A1A2A253C007494F8 /* Article.xcdatamodeld in Sources */,
 				BF8673801A2997D0007F119C /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -570,6 +582,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		BFABD6681A2A253C007494F8 /* Article.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				BFABD6691A2A253C007494F8 /* Article.xcdatamodel */,
+			);
+			currentVersion = BFABD6691A2A253C007494F8 /* Article.xcdatamodel */;
+			path = Article.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = BF1197421A17AB230046AEA0 /* Project object */;
 }
