@@ -10,7 +10,7 @@
 		4D5971D70E7052D3E0A3A3AB /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E0B62C58808A991A384C316E /* libPods.a */; };
 		BF1197501A17AB230046AEA0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BF11974F1A17AB230046AEA0 /* main.m */; };
 		BF1197531A17AB230046AEA0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BF1197521A17AB230046AEA0 /* AppDelegate.m */; };
-		BF1197561A17AB230046AEA0 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF1197551A17AB230046AEA0 /* ViewController.m */; };
+		BF1197561A17AB230046AEA0 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF1197551A17AB230046AEA0 /* MainViewController.m */; };
 		BF1197591A17AB230046AEA0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF1197571A17AB230046AEA0 /* Main.storyboard */; };
 		BF11975B1A17AB230046AEA0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BF11975A1A17AB230046AEA0 /* Images.xcassets */; };
 		BF11975E1A17AB230046AEA0 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF11975C1A17AB230046AEA0 /* LaunchScreen.xib */; };
@@ -20,6 +20,8 @@
 		BF1197881A17C0E70046AEA0 /* ScrollMenuBar.m in Sources */ = {isa = PBXBuildFile; fileRef = BF1197861A17C0E70046AEA0 /* ScrollMenuBar.m */; };
 		BF11978B1A17C0F10046AEA0 /* UIColor+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = BF11978A1A17C0F10046AEA0 /* UIColor+Hex.m */; };
 		BF2C3D131A260FF800A5A608 /* settings_button.png in Resources */ = {isa = PBXBuildFile; fileRef = BF2C3D121A260FF800A5A608 /* settings_button.png */; };
+		BF2C3D171A29783800A5A608 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF2C3D161A29783800A5A608 /* RootViewController.m */; };
+		BF2C3D191A29784A00A5A608 /* Root.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF2C3D181A29784900A5A608 /* Root.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,8 +41,8 @@
 		BF11974F1A17AB230046AEA0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		BF1197511A17AB230046AEA0 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		BF1197521A17AB230046AEA0 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		BF1197541A17AB230046AEA0 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		BF1197551A17AB230046AEA0 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		BF1197541A17AB230046AEA0 /* MainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
+		BF1197551A17AB230046AEA0 /* MainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		BF1197581A17AB230046AEA0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		BF11975A1A17AB230046AEA0 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		BF11975D1A17AB230046AEA0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -56,6 +58,9 @@
 		BF1197891A17C0F10046AEA0 /* UIColor+Hex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Hex.h"; sourceTree = "<group>"; };
 		BF11978A1A17C0F10046AEA0 /* UIColor+Hex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Hex.m"; sourceTree = "<group>"; };
 		BF2C3D121A260FF800A5A608 /* settings_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settings_button.png; sourceTree = "<group>"; };
+		BF2C3D151A29783800A5A608 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
+		BF2C3D161A29783800A5A608 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
+		BF2C3D181A29784900A5A608 /* Root.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Root.storyboard; sourceTree = "<group>"; };
 		E0B62C58808A991A384C316E /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4A6E9296B93E14CDD1CAAE9 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -111,11 +116,9 @@
 		BF11974C1A17AB230046AEA0 /* NewsAppSample */ = {
 			isa = PBXGroup;
 			children = (
+				BF2C3D141A2977DF00A5A608 /* ViewController */,
 				BF1197511A17AB230046AEA0 /* AppDelegate.h */,
 				BF1197521A17AB230046AEA0 /* AppDelegate.m */,
-				BF1197541A17AB230046AEA0 /* ViewController.h */,
-				BF1197551A17AB230046AEA0 /* ViewController.m */,
-				BF1197571A17AB230046AEA0 /* Main.storyboard */,
 				BF11975A1A17AB230046AEA0 /* Images.xcassets */,
 				BF11975C1A17AB230046AEA0 /* LaunchScreen.xib */,
 				BF11974D1A17AB230046AEA0 /* Supporting Files */,
@@ -164,6 +167,19 @@
 				BF2C3D121A260FF800A5A608 /* settings_button.png */,
 			);
 			path = images;
+			sourceTree = "<group>";
+		};
+		BF2C3D141A2977DF00A5A608 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				BF1197541A17AB230046AEA0 /* MainViewController.h */,
+				BF1197551A17AB230046AEA0 /* MainViewController.m */,
+				BF1197571A17AB230046AEA0 /* Main.storyboard */,
+				BF2C3D151A29783800A5A608 /* RootViewController.h */,
+				BF2C3D161A29783800A5A608 /* RootViewController.m */,
+				BF2C3D181A29784900A5A608 /* Root.storyboard */,
+			);
+			name = ViewController;
 			sourceTree = "<group>";
 		};
 		E41D4069017EEB72D6228191 /* Frameworks */ = {
@@ -256,6 +272,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BF2C3D191A29784A00A5A608 /* Root.storyboard in Resources */,
 				BF2C3D131A260FF800A5A608 /* settings_button.png in Resources */,
 				BF1197591A17AB230046AEA0 /* Main.storyboard in Resources */,
 				BF11975E1A17AB230046AEA0 /* LaunchScreen.xib in Resources */,
@@ -311,7 +328,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				BF1197871A17C0E70046AEA0 /* Menu.m in Sources */,
-				BF1197561A17AB230046AEA0 /* ViewController.m in Sources */,
+				BF1197561A17AB230046AEA0 /* MainViewController.m in Sources */,
+				BF2C3D171A29783800A5A608 /* RootViewController.m in Sources */,
 				BF1197751A17ABE80046AEA0 /* PagingScrollView.m in Sources */,
 				BF1197881A17C0E70046AEA0 /* ScrollMenuBar.m in Sources */,
 				BF11978B1A17C0F10046AEA0 /* UIColor+Hex.m in Sources */,

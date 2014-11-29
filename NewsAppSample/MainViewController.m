@@ -6,12 +6,12 @@
 //  Copyright (c) 2014年 edu.self. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "MainViewController.h"
 #import "PagingScrollView.h"
 
 
 
-@interface ViewController ()
+@interface MainViewController ()
 
 @property ScrollMenuBar *scrollMenuBar;
 @property NSArray *pageTitles;
@@ -24,7 +24,7 @@ static const float HEADER_HEIGHT = 80.0f;
 static const float STATUS_BAR_HEIGHT = 20.0f;
 static const float SCROLL_MENU_BAR_HEIGHT = 40.0f;
 
-@implementation ViewController{
+@implementation MainViewController{
     PagingScrollView *scrollView;
 
 }
