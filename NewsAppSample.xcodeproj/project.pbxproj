@@ -22,6 +22,8 @@
 		BF2C3D131A260FF800A5A608 /* settings_button.png in Resources */ = {isa = PBXBuildFile; fileRef = BF2C3D121A260FF800A5A608 /* settings_button.png */; };
 		BF2C3D171A29783800A5A608 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF2C3D161A29783800A5A608 /* RootViewController.m */; };
 		BF2C3D191A29784A00A5A608 /* Root.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF2C3D181A29784900A5A608 /* Root.storyboard */; };
+		BF2C3D1C1A297BFD00A5A608 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF2C3D1B1A297BFD00A5A608 /* SettingsViewController.m */; };
+		BF2C3D1E1A297C1800A5A608 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF2C3D1D1A297C1800A5A608 /* Settings.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +63,9 @@
 		BF2C3D151A29783800A5A608 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		BF2C3D161A29783800A5A608 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		BF2C3D181A29784900A5A608 /* Root.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Root.storyboard; sourceTree = "<group>"; };
+		BF2C3D1A1A297BFD00A5A608 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
+		BF2C3D1B1A297BFD00A5A608 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
+		BF2C3D1D1A297C1800A5A608 /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
 		E0B62C58808A991A384C316E /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4A6E9296B93E14CDD1CAAE9 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -178,6 +183,9 @@
 				BF2C3D151A29783800A5A608 /* RootViewController.h */,
 				BF2C3D161A29783800A5A608 /* RootViewController.m */,
 				BF2C3D181A29784900A5A608 /* Root.storyboard */,
+				BF2C3D1A1A297BFD00A5A608 /* SettingsViewController.h */,
+				BF2C3D1B1A297BFD00A5A608 /* SettingsViewController.m */,
+				BF2C3D1D1A297C1800A5A608 /* Settings.storyboard */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -275,6 +283,7 @@
 				BF2C3D191A29784A00A5A608 /* Root.storyboard in Resources */,
 				BF2C3D131A260FF800A5A608 /* settings_button.png in Resources */,
 				BF1197591A17AB230046AEA0 /* Main.storyboard in Resources */,
+				BF2C3D1E1A297C1800A5A608 /* Settings.storyboard in Resources */,
 				BF11975E1A17AB230046AEA0 /* LaunchScreen.xib in Resources */,
 				BF11975B1A17AB230046AEA0 /* Images.xcassets in Resources */,
 			);
@@ -330,6 +339,7 @@
 				BF1197871A17C0E70046AEA0 /* Menu.m in Sources */,
 				BF1197561A17AB230046AEA0 /* MainViewController.m in Sources */,
 				BF2C3D171A29783800A5A608 /* RootViewController.m in Sources */,
+				BF2C3D1C1A297BFD00A5A608 /* SettingsViewController.m in Sources */,
 				BF1197751A17ABE80046AEA0 /* PagingScrollView.m in Sources */,
 				BF1197881A17C0E70046AEA0 /* ScrollMenuBar.m in Sources */,
 				BF11978B1A17C0F10046AEA0 /* UIColor+Hex.m in Sources */,

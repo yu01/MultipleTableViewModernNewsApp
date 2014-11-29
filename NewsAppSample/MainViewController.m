@@ -192,7 +192,7 @@ static const float SCROLL_MENU_BAR_HEIGHT = 40.0f;
 
 -(void)respondToPushSettingsButton:(id)sender
 {
-    nil;
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"openSettings" object:self userInfo:nil];
 }
 
 
