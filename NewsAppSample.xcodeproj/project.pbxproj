@@ -29,6 +29,7 @@
 		BF8673801A2997D0007F119C /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF86737F1A2997D0007F119C /* SettingsViewController.swift */; };
 		BF8673821A299B45007F119C /* SettingsViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8673811A299B45007F119C /* SettingsViewCell.swift */; };
 		BFABD66A1A2A253C007494F8 /* Article.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BFABD6681A2A253C007494F8 /* Article.xcdatamodeld */; };
+		BFABD66D1A2A2629007494F8 /* Article.m in Sources */ = {isa = PBXBuildFile; fileRef = BFABD66C1A2A2629007494F8 /* Article.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,6 +77,8 @@
 		BF86737F1A2997D0007F119C /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		BF8673811A299B45007F119C /* SettingsViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewCell.swift; sourceTree = "<group>"; };
 		BFABD6691A2A253C007494F8 /* Article.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Article.xcdatamodel; sourceTree = "<group>"; };
+		BFABD66B1A2A2629007494F8 /* Article.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Article.h; sourceTree = "<group>"; };
+		BFABD66C1A2A2629007494F8 /* Article.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Article.m; sourceTree = "<group>"; };
 		E0B62C58808A991A384C316E /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4A6E9296B93E14CDD1CAAE9 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -209,6 +212,8 @@
 			isa = PBXGroup;
 			children = (
 				BFABD6681A2A253C007494F8 /* Article.xcdatamodeld */,
+				BFABD66B1A2A2629007494F8 /* Article.h */,
+				BFABD66C1A2A2629007494F8 /* Article.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -362,6 +367,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BFABD66D1A2A2629007494F8 /* Article.m in Sources */,
 				BF1197871A17C0E70046AEA0 /* Menu.m in Sources */,
 				BF1197561A17AB230046AEA0 /* MainViewController.m in Sources */,
 				BF2C3D171A29783800A5A608 /* RootViewController.m in Sources */,

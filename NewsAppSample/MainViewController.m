@@ -8,6 +8,9 @@
 
 #import "MainViewController.h"
 #import "PagingScrollView.h"
+#import "CoreData+MagicalRecord.h"
+#import "UIImageView+AFNetworking.h"
+#import "Article.h"
 
 
 
