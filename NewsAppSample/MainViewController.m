@@ -29,14 +29,20 @@ static const float HEADER_HEIGHT = 80.0f;
 static const float STATUS_BAR_HEIGHT = 20.0f;
 static const float SCROLL_MENU_BAR_HEIGHT = 40.0f;
 
-#define NULL_TO_NIL(obj) ({ __typeof__ (obj) __obj = (obj); __obj == [NSNull null] ? nil : obj; })
 
+
+#define NULL_TO_NIL(obj) ({ __typeof__ (obj) __obj = (obj); __obj == [NSNull null] ? nil : obj; })
+#define TAG_BASE 110
+#define TAG_OFFSET  10
+#define NUMBER_OF_TABLES  6
 
 @implementation MainViewController{
     PagingScrollView *scrollView;
     
     //To interact with the API, create an instance variable
     AFHTTPRequestOperationManager *_operationManager;
+    
+    NSMutableArray *_categorizedArticlesArray;
 }
 
 #pragma mark - View LifeCycle
@@ -109,7 +115,10 @@ static const float SCROLL_MENU_BAR_HEIGHT = 40.0f;
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.articles.count;
+    NSInteger categoryId = [self toCategoryId:tableView.tag];
+    NSArray *categorizedArticles = [self lookupArticlesByCategoryId:_categorizedArticlesArray categoryId:categoryId];
+    
+    return categorizedArticles.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -117,15 +126,42 @@ static const float SCROLL_MENU_BAR_HEIGHT = 40.0f;
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"
                                                             forIndexPath:indexPath];
-    [self configureCell:cell atIndex:indexPath];
+
+    NSInteger categoryId = [self toCategoryId:tableView.tag];
+    [self configureCell:cell atIndex:indexPath categoryId:categoryId];
+    
     return cell;
 }
 
--(void)configureCell:(UITableViewCell*)cell atIndex:(NSIndexPath*)indexPath{
-    // Get current article
-    Article *article = self.articles[indexPath.row];
+-(void)configureCell:(UITableViewCell*)cell atIndex:(NSIndexPath*)indexPath categoryId:(NSInteger)categoryId{
+    
+    NSArray *categorizedArticles = [self lookupArticlesByCategoryId:_categorizedArticlesArray categoryId:categoryId];
+    Article *article  = categorizedArticles[indexPath.row];
+    
     cell.textLabel.text = article.title;
     
+}
+
+-(NSInteger)toCategoryId:(NSInteger)tableViewTag
+{
+    NSInteger base = (tableViewTag - TAG_BASE);
+    return ((base/10)+1);
+}
+
+-(NSArray*)lookupArticlesByCategoryId:(NSMutableArray*)categoryArticlesArray categoryId:(NSInteger)categoryId
+{
+    NSInteger index = (categoryId-1);
+    return (NSArray*)categoryArticlesArray[index];
+}
+
+-(NSMutableArray*)newCategorizedArticlesArray
+{
+    NSMutableArray *articlesArray = [NSMutableArray new];
+    for(int i=0; i<NUMBER_OF_TABLES; i++){
+        NSArray *categorizedArticles = [Article MR_findByAttribute:@"categoryId" withValue:[NSNumber numberWithInt:(i+1)]];
+        [articlesArray addObject:categorizedArticles];
+    }
+    return articlesArray;
 }
 
 #pragma mark - API
@@ -148,7 +184,7 @@ static const float SCROLL_MENU_BAR_HEIGHT = 40.0f;
             NSString *link = [article objectForKey:@"link"];
             NSString *imageUrl = @"";
             NSString *body = NULL_TO_NIL([article objectForKey:@"description"]);
-            NSInteger categoryId = [[article objectForKey:@"icategory_id"] integerValue];
+            NSInteger categoryId = [[article objectForKey:@"category_id"] integerValue];
             
             //Check if we already saved this articles...
             Article *existingEntity = [Article MR_findFirstByAttribute:@"link" withValue:link];
@@ -160,7 +196,7 @@ static const float SCROLL_MENU_BAR_HEIGHT = 40.0f;
                 articleEntity.categoryId = categoryId;
                 articleEntity.title = title;
                 articleEntity.imageUrl = imageUrl;
-                articleEntity.body = (body == nil)? @"" : body;
+                articleEntity.body = body;
                 articleEntity.link = link;
             }
         }
@@ -168,9 +204,10 @@ static const float SCROLL_MENU_BAR_HEIGHT = 40.0f;
         //Persist created entities to storage
         [MagicalRecord saveUsingCurrentThreadContextWithBlock:^(NSManagedObjectContext *localContext) {
             
-            //Fetch all stored entitieds & reload tableView
-            self.articles = [[Article MR_findAll] mutableCopy];
-            
+            //Fetch categorized articles
+            _categorizedArticlesArray = [self newCategorizedArticlesArray];
+
+            //reload table view
             for(UIView *view in [scrollView subviews]){
                 if([view isKindOfClass:[UITableView class]]){
                     UITableView *tableView = (UITableView*)view;
@@ -196,7 +233,7 @@ static const float SCROLL_MENU_BAR_HEIGHT = 40.0f;
 
 - (void)loadPagingScrollView
 {
-    int numberOfTables = 6;
+
     float tableWidth = self.view.bounds.size.width;
     
     CGFloat height = self.view.bounds.size.height;
@@ -204,51 +241,28 @@ static const float SCROLL_MENU_BAR_HEIGHT = 40.0f;
     
     scrollView = [[PagingScrollView alloc] initWithFrame:CGRectMake(0,0,self.view.bounds.size.width, self.view.bounds.size.height)];
 
-    scrollView.contentSize = CGSizeMake(tableWidth * numberOfTables, height);
+    scrollView.contentSize = CGSizeMake(tableWidth * NUMBER_OF_TABLES, height);
     scrollView.pagingEnabled = YES;
     scrollView.bounds = tableBounds; // scrollViewのページングをtableWidth単位に。
     scrollView.clipsToBounds = NO;   // 非表示になっているtableBounds外を表示。
     scrollView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:scrollView];
     
-    // ５つのtableViewを横に並べる
+    // tableViewを横に並べる
     CGRect tableFrame = tableBounds;
 
     tableFrame.origin.x = 0.f;
     tableFrame.origin.y = (STATUS_BAR_HEIGHT + HEADER_HEIGHT);
-    for (int i = 0; i < numberOfTables; i++) {
+
+    //align multiple tableviews
+    for (int i = 0; i < NUMBER_OF_TABLES; i++) {
         
         UITableView *tableView = [[UITableView alloc] initWithFrame:tableFrame style:UITableViewStylePlain];
         
-        //TODO refactore
-        switch (i) {
-            case 0:
-                tableView.backgroundColor = [UIColor greenColor];
-                tableView.tag = 100;
-                break;
-            case 1:
-                tableView.backgroundColor = [UIColor redColor];
-                tableView.tag = 110;
-                break;
-            case 2:
-                tableView.backgroundColor = [UIColor blueColor];
-                tableView.tag = 120;
-                break;
-            case 3:
-                tableView.backgroundColor = [UIColor orangeColor];
-                tableView.tag = 130;
-                break;
-            case 4:
-                tableView.backgroundColor = [UIColor purpleColor];
-                tableView.tag = 140;
-                break;
-            case 5:
-                tableView.backgroundColor = [UIColor grayColor];
-                tableView.tag = 150;
-                break;
-            default:
-                break;
-        }
+        //TODO refactor
+        tableView.backgroundColor = [UIColor whiteColor];
+        tableView.tag = (TAG_BASE + TAG_OFFSET * i);
+        
         [scrollView addSubview:tableView];
         
         tableFrame.origin.x += tableWidth;
