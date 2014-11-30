@@ -45,7 +45,8 @@ static const float SCROLL_MENU_BAR_HEIGHT = 40.0f;
     // Do any additional setup after loading the view, typically from a nib.
     
     //Initialize AFHTTPRequestOperationManager with API Base URL
-    _operationManager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:@"http://api.dribbble.com/"]];
+//    _operationManager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:@"http://api.dribbble.com/"]];
+    _operationManager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:@"http://geeknews.herokuapp.com/"]];
     
     [self refreshData];
     
@@ -60,7 +61,6 @@ static const float SCROLL_MENU_BAR_HEIGHT = 40.0f;
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    [self refreshData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -132,31 +132,36 @@ static const float SCROLL_MENU_BAR_HEIGHT = 40.0f;
 - (void)refreshData
 {
     //Fetch articles from API
-    [_operationManager GET:@"shots/popular" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
+    [_operationManager GET:@"api/v1/article" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    
         //AFNetworking parses the JSON response, which can now be used like a NSDictionary
-        id articles = [operation.responseObject objectForKey:@"shots"];
+        id articles = operation.responseObject;
+
+        //for debug
+        [Article MR_truncateAll];
         
         //Loop through articles from API
         for(id article in articles){
 
             //Take some values we'll need
             NSString *title = [article objectForKey:@"title"];
-            NSString *imageUrl = [article objectForKey:@"image_teaser_url"];
+            NSString *link = [article objectForKey:@"link"];
+            NSString *imageUrl = @"";
             NSString *body = NULL_TO_NIL([article objectForKey:@"description"]);
-            NSInteger articleId = [[article objectForKey:@"id"] integerValue];
+            NSInteger categoryId = [[article objectForKey:@"icategory_id"] integerValue];
             
             //Check if we already saved this articles...
-            Article *existingEntity = [Article MR_findFirstByAttribute:@"articleId" withValue:[NSNumber numberWithInteger:articleId]];
-            
+            Article *existingEntity = [Article MR_findFirstByAttribute:@"link" withValue:link];
+
             //... if not, create a new entity
             if(!existingEntity)
             {
                 Article *articleEntity = [Article MR_createEntity];
-                articleEntity.articleId = articleId;
+                articleEntity.categoryId = categoryId;
                 articleEntity.title = title;
                 articleEntity.imageUrl = imageUrl;
                 articleEntity.body = (body == nil)? @"" : body;
+                articleEntity.link = link;
             }
         }
         

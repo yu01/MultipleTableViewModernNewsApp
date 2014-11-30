@@ -16,6 +16,7 @@
 @property (nonatomic, retain) NSString * body;
 @property (nonatomic, retain) NSString * title;
 //NSInteger is a scalar and not an object. So you shouldn't retain it, it should be assigned.
-@property (nonatomic, assign) NSInteger  articleId;
+@property (nonatomic, assign) NSInteger  categoryId;
+@property (nonatomic, retain) NSString * link;
 
 @end
